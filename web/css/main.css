@@ -2588,7 +2588,7 @@ body::-webkit-scrollbar-thumb:hover {
     position: fixed;
     top: 0;
     left: 0;
-    background: transparent url(../images/site/upper-nebula.png) no-repeat fixed left top;
+    background: transparent url(img/upper-nebula.png) no-repeat fixed left top;
     z-index: -1
 }
 
@@ -2599,7 +2599,7 @@ body::-webkit-scrollbar-thumb:hover {
     position: fixed;
     bottom: 0;
     left: 0;
-    background: transparent url(../images/site/lower-nebula.png) no-repeat fixed right bottom;
+    background: transparent url(img/lower-nebula.png) no-repeat fixed right bottom;
     z-index: -1
 }
 
