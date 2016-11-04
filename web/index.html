@@ -6,6 +6,7 @@
 	<meta content="What this page is about." name="description">
 	<meta content="Display Webcam Stream" name="title">
 	<meta name="mobile-web-app-capable" content="yes">
+	<link id="stylesheet" rel="stylesheet" href="../css/main.css">
 	<title>MatchYang</title>
 	
 	<style>
@@ -27,19 +28,20 @@
 	<div>
 		<div id="header" style="text-align: center;">
 			<h3>MatchYang</h3>
-			<img src="img/yin-yang-pisces-fish.png" style="width:210px; height:190px;">
+			<!-- Capture button -->
+			<button id="capture-btn"><img src="img/yin-yang-pisces-fish.png" style="width:225px; height:190px;"></button>
 		</header>
 		<div id="container">
 			<!-- Video element (live stream) -->
 			<label>Video Stream</label>
-			<video autoplay id="video" width="640" height="480"></video>
+			<video autoplay id="video" width="auto" height="auto"></video>
+	</div>
+
+			<div id="container">
 
 			<!-- Canvas element (screenshot) -->
-			<label>Screenshot (base 64 dataURL)</label>
+			<label>Screenshot </label>
 			<canvas id="canvas" width="640" height="480"></canvas>
-
-			<!-- Capture button -->
-			<button id="capture-btn"><img src="img/yin-yang-pisces-fish.png" style="width:110px; height:90px;">Capture!</button>
 
 		</div>
 
@@ -66,12 +68,6 @@
 		captureBtn: document.querySelector(options.captureBtn),
 		// This will hold the video stream.
 		localMediaStream: null,
-		// This will hold the screenshot base 64 data url.
-		dataURL: null,
-		// This will hold the converted PNG url.
-		imageURL: null,
-		// Get the input field to paste in the imageURL.
-		imageURLInput: document.querySelector(options.imageURLInput),
 
 		initialize: function() {
 			var that = this;
@@ -127,46 +123,7 @@
 				// Call our method to save the data url to an image.
 				that.saveDataUrlToImage();
 			}
-		},
-		
-		saveDataUrlToImage: function () {
-			var that = this;
-			var options = {
-				// Change this to your own url.
-				url: 'http://guillesierra.com/dataurltoimage'
-			};
-			
-			// Only place where we need jQuery to make an ajax request
-			// to our server to convert the dataURL to a PNG image,
-			// and return the url of the converted image.
-			that.imageURLInput.value = 'Fetching url ...';
-			$.ajax({
-				url: options.url,
-				type: 'POST',
-				dataType: 'json',
-				data: { 'data_url': dataURL },
-				complete: function(xhr, textStatus) {
-				// Request complete.
-			},
-				// Request was successful.
-				success: function(response, textStatus, xhr) {
-					console.log('Response: ', response);
-					// Conversion successful.
-					if (response.status_code === 200) {
-						imageURL = response.data.image_url;
-						// Paste the PNG image url into the input field.
-						that.imageURLInput.value = imageURL;
-						that.imageURLInput.removeAttribute('disabled');
-					}
-				},
-				error: function(xhr, textStatus, errorThrown) {
-					// Some error occured.
-					console.log('Error: ', errorThrown);
-					imageURLInput.value = 'An error occured.';
-				}
-			});
 		}
-
 	};
 
 	// Initialize our application.
@@ -174,7 +131,6 @@
 	
 	// Expose to window object for testing purposes.
 	window.App = App;
-
 })();
 
 </script>
