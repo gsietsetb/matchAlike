@@ -2547,7 +2547,7 @@ textarea:-ms-input-placeholder {
 
 body {
     position: relative;
-    background: #000 url(../images/site/stars.png) repeat 0 0;
+    background: #000000;
     min-width: 280px;
     color: rgba(177, 201, 208, 0.8);
     padding: 0;
